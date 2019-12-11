@@ -86,11 +86,24 @@ public class TestOauth2 {
         paramMap.put("client_secret","357f98f9c9d412faea21cc47b11878e5");
         paramMap.put("grant_type","authorization_code");
         paramMap.put("redirect_uri","http://password.gmall.com:8085/vlogin");
-        paramMap.put("code","7a9aad88efcd7f8fc74ae35944508a75");// 授权有效期内可以使用，没新生成一次授权码，说明用户对第三方数据进行重启授权，之前的access_token和授权码全部过期
-        //String access_token_json = HttpclientUtil.doPost(s3, paramMap);
-        String access_token=HttpclientUtil.doPost(s3,paramMap);
+        paramMap.put("code","b90155cba0a4c565341a727eb07e08be");// 授权有效期内可以使用，没新生成一次授权码，说明用户对第三方数据进行重启授权，之前的access_token和授权码全部过期
+//        String access_token=HttpclientUtil.doPost(s3,paramMap);
+//
+//        Map<String,String> access_map=JSON.parseObject(access_token,Map.class);
+//
+//        System.out.println(access_map.get("access_token"));
+//        System.out.println(access_token);
 
-        System.out.println(access_token);
+        //4用access查询用户信息
+        String s4 = "https://api.weibo.com/2/users/show.json?access_token=2.00H1GWzGzTCfjBcb8e9cfc1aQenG1B&uid=1";
+        String user_json = HttpclientUtil.doGet(s4);
+        Map<String,String> user_map = JSON.parseObject(user_json,Map.class);
+
+        System.out.println(user_map.get("1"));
+
+
+
+
 
 
     }
