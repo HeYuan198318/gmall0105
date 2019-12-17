@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -197,8 +198,8 @@ public class SkuServiceImpl implements SkuService {
                     //在访问mysql后，将mysql的分布式锁释放
                     System.out.println("ip为"+ip+"的同学:"+Thread.currentThread().getName()+"使用完毕，将锁归还："+"sku:" + skuId + ":lock");
                     String lockToken = jedis.get("sku" + skuId + ":lock");
-                    if (StringUtils.isNotBlank(lockToken) && lockToken.equals(token)) {
-
+                    if (StringUtils.isNotBlank(lockToken) && lockToken.equals(token)){
+                        //jedis.eval("lua");可与用lua脚本，在查询到key的同时删除该key，防止高并发下的意外的发生
                         jedis.del("sku" + skuId + ":lock");//用token确定删除是自己的sku的锁
                     }
 
@@ -244,6 +245,23 @@ public class SkuServiceImpl implements SkuService {
             pmsSkuInfo.setSkuAttrValueList(select);
         }
         return pmsSkuInfos;
+    }
+
+    //校验价格
+    @Override
+    public boolean checkPrice(String productSkuId, BigDecimal productPrice) {
+        boolean b = false;
+
+        PmsSkuInfo pmsSkuInfo = new PmsSkuInfo();
+        pmsSkuInfo.setId(productSkuId);
+        PmsSkuInfo pmsSkuInfo1 = pmsSkuInfoMapper.selectOne(pmsSkuInfo);
+
+        BigDecimal price = pmsSkuInfo1.getPrice();
+
+        if(price.compareTo(productPrice)==0){
+            b = true;
+        }
+        return b;
     }
 
 

@@ -18,3 +18,8 @@ gmall-card-web购物车8084
 
 gmall-password-web用户认证中心8085
 gmall-user-service 用户服务的service层8070
+
+gmall-order-web 订单 8086
+gmall-order-service 订单服务8076
+
+gmall-payment8087

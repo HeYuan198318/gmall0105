@@ -14,7 +14,7 @@ public class TestOauth2 {
         // 1590848947
         // http://passport.gmall.com:8085/lvlogin
 
-        String s1 = HttpclientUtil.doGet("https://api.weibo.com/oauth2/authorize?client_id=1590848947&response_type=code&redirect_uri=http://password.gmall.com:8085/lvlogin");
+        String s1 = HttpclientUtil.doGet("https://api.weibo.com/oauth2/authorize?client_id=1590848947&response_type=code&redirect_uri=http://password.gmall.com:8086/lvlogin");
 
         System.out.println(s1);
 
@@ -71,8 +71,6 @@ public class TestOauth2 {
 
         //System.out.println(s1);
 
-        // 在第一步和第二部返回回调地址之间,有一个用户操作授权的过程
-
         // 2 返回授权码到回调地址
         String s2="http://password.gmall.com:8085/vlogin?code=9646f7b62cf7dd98934020f0df41afa4";
 
@@ -100,9 +98,6 @@ public class TestOauth2 {
         Map<String,String> user_map = JSON.parseObject(user_json,Map.class);
 
         System.out.println(user_map.get("1"));
-
-
-
 
 
 

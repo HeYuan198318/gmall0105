@@ -2,6 +2,7 @@ package com.heyuan.gmall.util;
 
 import com.alibaba.fastjson.JSON;
 import io.jsonwebtoken.impl.Base64UrlCodec;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -23,7 +24,7 @@ public class TestJwt {
         System.err.println(encode);
 
         //解析私有部分
-        // String tokenUserInfo = StringUtils.substringBetween(encode, ".");
+        String tokenUserInfo = StringUtils.substringBetween(encode, ".");
         Base64UrlCodec base64UrlCodec = new Base64UrlCodec();
         byte[] tokenBytes = base64UrlCodec.decode("eyJuaWNrbmFtZSI6InpoYW5nc2FuIiwibWVtYmVySWQiOiIxIn0");
         String tokenJson = null;
@@ -33,7 +34,10 @@ public class TestJwt {
             e.printStackTrace();
         }
         Map map1 = JSON.parseObject(tokenJson, Map.class);
+        System.out.println(tokenUserInfo);
         System.out.println("64="+map1);
+        System.out.println(map1.get("nickname"));
+
 
 
     }

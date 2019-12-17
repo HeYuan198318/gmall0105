@@ -15,7 +15,10 @@
         <module name="gmall-item-web" />
         <module name="gmall-manage-service" />
         <module name="gmall-manage-web" />
+        <module name="gmall-order-service" />
+        <module name="gmall-order-web" />
         <module name="gmall-passwort-web" />
+        <module name="gmall-payment" />
         <module name="gmall-redisson-test" />
         <module name="gmall-search-service" />
         <module name="gmall-search-web" />
@@ -36,8 +39,11 @@
       <module name="gmall-item-web" target="1.8" />
       <module name="gmall-manage-service" target="1.8" />
       <module name="gmall-manage-web" target="1.8" />
+      <module name="gmall-order-service" target="1.8" />
+      <module name="gmall-order-web" target="1.8" />
       <module name="gmall-parent" target="1.8" />
       <module name="gmall-passwort-web" target="1.8" />
+      <module name="gmall-payment" target="1.8" />
       <module name="gmall-redisson-test" target="1.8" />
       <module name="gmall-search-service" target="1.8" />
       <module name="gmall-search-web" target="1.8" />
@@ -57,7 +63,10 @@
       <module name="gmall-item-web" options="-parameters" />
       <module name="gmall-manage-service" options="-parameters" />
       <module name="gmall-manage-web" options="-parameters" />
+      <module name="gmall-order-service" options="-parameters" />
+      <module name="gmall-order-web" options="-parameters" />
       <module name="gmall-passwort-web" options="-parameters" />
+      <module name="gmall-payment" options="-parameters" />
       <module name="gmall-redisson-test" options="-parameters" />
       <module name="gmall-search-service" options="-parameters" />
       <module name="gmall-search-web" options="-parameters" />

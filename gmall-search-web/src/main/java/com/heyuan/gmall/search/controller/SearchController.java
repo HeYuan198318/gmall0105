@@ -1,15 +1,18 @@
 package com.heyuan.gmall.search.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSON;
 import com.heyuan.gmall.annotations.LoginRequired;
 import com.heyuan.gmall.bean.*;
 import com.heyuan.gmall.service.AttrService;
 import com.heyuan.gmall.service.SearchService;
+import io.jsonwebtoken.impl.Base64UrlCodec;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @Controller
@@ -20,6 +23,8 @@ public class SearchController {
 
     @Reference
     AttrService attrService;
+
+    public String nickname=null;
 
     @RequestMapping("list.html")
     public String list(PmsSearchParam pmsSearchParam, ModelMap modelMap){// 三级分类id、关键字、
@@ -81,6 +86,7 @@ public class SearchController {
         if (StringUtils.isNotBlank(keyword)) {
             modelMap.put("keyword", keyword);
         }
+        modelMap.put("nickname",nickname);
 
         return "list";
     }
@@ -151,7 +157,24 @@ public class SearchController {
 
     @RequestMapping("index")
     @LoginRequired(loginSuccess = false)
-    public String index(){
-        return "index";
+    public String index(String token,ModelMap modelMap){
+        //解析token,获取用户数据
+        //解析私有部分
+        if (token!=null) {
+            String tokenUserInfo = StringUtils.substringBetween(token, ".");
+            Base64UrlCodec base64UrlCodec = new Base64UrlCodec();
+            byte[] tokenBytes = base64UrlCodec.decode(tokenUserInfo);
+            String tokenJson = null;
+            try {
+                tokenJson = new String(tokenBytes, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            Map map1 = JSON.parseObject(tokenJson, Map.class);
+            modelMap.put("nickname", map1.get("nickname"));
+            nickname=(String)map1.get("nickname");
+            return "index";
+        }else {
+        return "index";}
     }
 }

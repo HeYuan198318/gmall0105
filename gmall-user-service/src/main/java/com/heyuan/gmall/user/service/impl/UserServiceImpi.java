@@ -41,7 +41,6 @@ public class UserServiceImpi implements UserService {
 //        umsMemberReceiveAddress.setMemberId(memberId);
 //        List<UmsMemberReceiveAddress> umsMemberReceiveAddresses = umsMemberReceiveAddressMapper.select(umsMemberReceiveAddress);
 
-
         //执行的sql语句 where (aa=?)
         Example example = new Example(UmsMemberReceiveAddress.class);
         example.createCriteria().andEqualTo("memberId",memberId);
@@ -58,7 +57,7 @@ public class UserServiceImpi implements UserService {
             //先从redis中获取
             jedis = redisUtil.getJedis();
             if (jedis!=null) {
-                String umsMemberStr = jedis.get("user:" + umsMember.getUsername() + ":password");
+                String umsMemberStr = jedis.get("user:" + umsMember.getPassword()+umsMember.getUsername() + ":info");
 
                 if (StringUtils.isNotBlank(umsMemberStr)) {
                     //密码正确
@@ -69,8 +68,7 @@ public class UserServiceImpi implements UserService {
                 //连接redis失败，开启数据库
                 UmsMember umsMemberFromDb=loginFromDb(umsMember);
                 if (umsMemberFromDb!=null){
-                    jedis.setex("user:" + umsMember.getUsername() + ":password",60*60*24,JSON.toJSONString(umsMemberFromDb));
-                }
+                    jedis.setex("user:" + umsMember.getPassword()+umsMember.getUsername() + ":info",60*60*24, JSON.toJSONString(umsMemberFromDb));                }
                 return umsMemberFromDb;
         }finally {
            jedis.close();
@@ -86,13 +84,37 @@ public class UserServiceImpi implements UserService {
         jedis.close();
     }
 
+    //添加微博登录的用户信息在数据库
+    @Override
+    public UmsMember addOauthUser(UmsMember umsMember) {
+        userMapper.insertSelective(umsMember);
+        return umsMember;
+    }
+
+    @Override
+    public UmsMember checkOauthUser(UmsMember umsCheck) {
+        UmsMember umsMember = userMapper.selectOne(umsCheck);
+        return umsMember;
+    }
+
+    //获取收货用户对象
+    @Override
+    public UmsMemberReceiveAddress getReceiveAddressById(String receiveAddressId) {
+        UmsMemberReceiveAddress umsMemberReceiveAddress=new UmsMemberReceiveAddress();
+        umsMemberReceiveAddress.setId(receiveAddressId);
+        UmsMemberReceiveAddress umsMemberReceiveAddress1=umsMemberReceiveAddressMapper.selectOne(umsMemberReceiveAddress);
+        return umsMemberReceiveAddress1;
+    }
+
     private UmsMember loginFromDb(UmsMember umsMember) {
 
         List<UmsMember> umsMembers=userMapper.select(umsMember);
 
-        if (umsMembers!=null){
+        if (umsMembers.size()!=0){
             return umsMembers.get(0);
         }
-        return null;
+        else {
+            return null;
+        }
     }
 }

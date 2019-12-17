@@ -32,16 +32,6 @@ public class CartController {
     CartService cartService;
 
 
-    @RequestMapping("toTrade")
-    @LoginRequired(loginSuccess = true)
-    public String toTrade(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap modelMap) {
-        //通过认证中心获取的用户信息
-        String memberId = (String)request.getAttribute("memberId");
-        String nickname = (String)request.getAttribute("nickname");
-
-        return "toTrade";
-    }
-
     //选择购物车，购物车界面局部刷新
     @RequestMapping("checkCart")
     @LoginRequired(loginSuccess = false)
@@ -61,11 +51,12 @@ public class CartController {
         // 将最新的数据从缓存中查出，渲染给内嵌页
         List<OmsCartItem> omsCartItems = cartService.cartList(memberId);
         modelMap.put("cartList",omsCartItems);
+        modelMap.put("nickname",nickname);
 
         // 被勾选商品的总额
         BigDecimal totalAmount =getTotalAmount(omsCartItems);
         modelMap.put("totalAmount",totalAmount);
-        return "cartListInner";
+        return "cartList";
     }
 
 
@@ -76,6 +67,7 @@ public class CartController {
         List<OmsCartItem> omsCartItems = new ArrayList<>();
         String memberId = (String)request.getAttribute("memberId");
         String nickname = (String)request.getAttribute("nickname");
+        modelMap.put("nickname",nickname);
 
         if(StringUtils.isNotBlank(memberId)){
             // 已经登录查询db
@@ -94,7 +86,7 @@ public class CartController {
         }
 
         modelMap.put("cartList",omsCartItems);
-        //被勾选的商品总额
+        //被勾选的商品
         BigDecimal totalAmount=getTotalAmount(omsCartItems);
         modelMap.put("totalAmount",totalAmount);
         return "cartList";
@@ -105,7 +97,6 @@ public class CartController {
 
         for (OmsCartItem omsCartItem : omsCartItems) {
             BigDecimal totalPrice = omsCartItem.getTotalPrice();
-
             if(omsCartItem.getIsChecked().equals("1")){
                 totalAmount = totalAmount.add(totalPrice);
             }
@@ -136,6 +127,7 @@ public class CartController {
         omsCartItem.setProductSkuCode("11111111111");
         omsCartItem.setProductSkuId(skuId);
         omsCartItem.setQuantity(new BigDecimal(quantity));
+        omsCartItem.setIsChecked("0");
 
 
         // 判断用户是否登录
@@ -210,5 +202,14 @@ public class CartController {
         }
         return b;
     }
+
+
+
+    @RequestMapping("One_JDshop")
+    @LoginRequired(loginSuccess = false)
+    public String index(){
+        return "One_JDshop";
+    }
+
 
 }
