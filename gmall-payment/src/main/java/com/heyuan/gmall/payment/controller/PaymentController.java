@@ -76,7 +76,9 @@ public class PaymentController {
     @RequestMapping("mx/submit")
     @LoginRequired(loginSuccess = true)
     public String mx(String outTradeNo, BigDecimal totalAmount, HttpServletRequest request, ModelMap modelMap){
-        return null;
+        modelMap.put("outTradeNo",outTradeNo);
+        modelMap.put("totalAmount",totalAmount);
+        return "pay";
     }
 
 //    @RequestMapping("finish")
@@ -126,7 +128,7 @@ public class PaymentController {
         paymentService.savePaymentInfo(paymentInfo);
 
         // 向消息中间件发送一个检查支付状态(支付服务消费)的延迟消息队列
-        //paymentService.sendDelayPaymentResultCheckQueue(outTradeNo,5);
+        paymentService.sendDelayPaymentResultCheckQueue(outTradeNo,5);
         return form;
     }
 

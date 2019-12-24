@@ -82,6 +82,7 @@ public class SkuServiceImpl implements SkuService {
         }
     }
 
+    //发出商品的暖存同步消息
     //添加sku时同时上传到es服务器
     public void put() throws IOException {
 

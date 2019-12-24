@@ -2,10 +2,7 @@ package com.heyuan.gmall.manage.servive.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.heyuan.gmall.bean.*;
-import com.heyuan.gmall.manage.mapper.PmsProductImageMapper;
-import com.heyuan.gmall.manage.mapper.PmsProductInfoMapper;
-import com.heyuan.gmall.manage.mapper.PmsProductSaleAttrMapper;
-import com.heyuan.gmall.manage.mapper.PmsProductSaleAttrValueMapper;
+import com.heyuan.gmall.manage.mapper.*;
 import com.heyuan.gmall.service.SpuService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,6 +21,9 @@ public class SpuServiceImpl implements SpuService {
 
     @Autowired
     PmsProductSaleAttrValueMapper pmsProductSaleAttrValueMapper;
+
+    @Autowired
+    PmsSkuInfoMapper pmsSkuInfoMapper;
 
     @Override
     public List<PmsProductInfo> spuList(String catalog3Id) {
@@ -110,6 +110,32 @@ public class SpuServiceImpl implements SpuService {
 
         List<PmsProductSaleAttr> pmsProductSaleAttrs = pmsProductSaleAttrMapper.selectSpuSaleAttrListCheckBySku(productId,skuId);
         return pmsProductSaleAttrs;
+    }
+
+    /**
+     * 删除spu(商品下架)
+     * @param spuId
+     */
+    @Override
+    public void deleteSpuInfo(String spuId) {
+        PmsProductInfo pmsProductInfo = new PmsProductInfo();
+        pmsProductInfo.setId(spuId);
+        pmsProductInfoMapper.delete(pmsProductInfo);
+
+        //删除该spu所有的sku
+        PmsSkuInfo pmsSkuInfo=new PmsSkuInfo();
+        pmsSkuInfo.setProductId(spuId);
+        pmsSkuInfoMapper.delete(pmsSkuInfo);
+
+    }
+
+    @Override
+    public  PmsProductInfo getspuInfo(String spuId) {
+        PmsProductInfo pmsProductInfo = new PmsProductInfo();
+        pmsProductInfo.setId(spuId);
+        PmsProductInfo pmsProductInfo1=pmsProductInfoMapper.selectByPrimaryKey(pmsProductInfo);
+        return pmsProductInfo1;
+
     }
 
 

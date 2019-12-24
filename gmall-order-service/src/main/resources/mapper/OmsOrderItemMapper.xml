@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heyuan.gmall.order.mapper.OmsOrderItemMapper">
+
+    <select id="selectAllOrderItemValueList" resultMap="selectAllOrderItemValueListMap">
+        SELECT
+            b.member_username, a.*,a.order_id as a_orderid,b.id as b_id
+        FROM
+            oms_order_item a,
+            oms_order b
+        WHERE
+        b.member_username= #{username}
+        AND a.order_id = b.id
+    </select>
+
+    <resultMap id="selectAllOrderItemValueListMap" type="com.heyuan.gmall.bean.OmsOrderItem" autoMapping="true">
+        <result column="a_orderid" property="id"></result>
+        <collection property="OmsOrderList" ofType="com.heyuan.gmall.bean.OmsOrder" autoMapping="true">
+            <result column="b_id" property="id"></result>
+        </collection>
+    </resultMap>
+
+</mapper>

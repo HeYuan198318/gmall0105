@@ -57,9 +57,10 @@
                 </li>
             </ul>
             <ul class="header_ul_right">
-                <li style="border: 0;"><a href="../登录页面\index.html" class="aa">你好，请登录</a></li>
+                <li style="border: 0;"><a href="http://passport.gmall.com:8085/index?ReturnUrl=http://item.gmall.com:8082/item" class="aa" th:text="(${nickname}!=null)?${nickname}:'你好,请登录'">你好，请登录</a>
+                </li>
                 <li><a href="../注册页面\index.html" style="color: red;">免费注册</a> |</li>
-                <li><a href="javascript:;" class="aa">我的订单</a> |</li>
+                <li><a href="http://127.0.0.1:8080/home-setting-info.html" class="aa">我的订单</a> |</li>
 
             </ul>
         </div>
@@ -67,7 +68,7 @@
     <nav>
         <div class="nav_min">
             <div class="nav_top">
-                <div class="nav_top_one"><a href="#"><img src="/img/logo1.jpg"/></a></div>
+                <div class="nav_top_one"><a href="#"><img src="/img/logo.jpg" width="169px" height="52px"></a></div>
                 <div class="nav_top_two"><input type="text"/>
                     <button>搜索</button>
                 </div>

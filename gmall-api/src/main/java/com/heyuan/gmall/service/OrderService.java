@@ -1,6 +1,10 @@
 package com.heyuan.gmall.service;
 
+
 import com.heyuan.gmall.bean.OmsOrder;
+import com.heyuan.gmall.bean.OmsOrderItem;
+
+import java.util.List;
 
 public interface OrderService {
     String checkTradeCode(String memberId, String tradeCode);
@@ -12,4 +16,6 @@ public interface OrderService {
     OmsOrder getOrderByOutTradeNo(String outTradeNo);
 
     void updateOrder(OmsOrder omsOrder);
+
+    List<OmsOrderItem> selectAllOrderItemValueList(String nickname);
 }

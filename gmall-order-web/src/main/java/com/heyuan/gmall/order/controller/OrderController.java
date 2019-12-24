@@ -186,5 +186,22 @@ public class OrderController {
         return totalAmount;
     }
 
+    @RequestMapping("list")
+    @LoginRequired(loginSuccess = true)
+    public String orderlist( HttpServletRequest request,ModelMap modelMap) {
+
+        String memberId = (String) request.getAttribute("memberId");
+        String nickname = (String) request.getAttribute("nickname");
+
+        //调用数据库获取订单信息
+        List<OmsOrderItem> omsOrderItems=orderService.selectAllOrderItemValueList(nickname);
+        modelMap.put("orderList",omsOrderItems);
+        modelMap.put("username",nickname);
+        //拆单信息
+
+      return "list";
+    }
+
+
 
 }

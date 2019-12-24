@@ -56,7 +56,7 @@
         <div class="one_search_load"   th:if="${userId}==null" >
             <img src="/img/shop_07.jpg" class="one_load_wraing">
             <span>您还没有登录！登录后购物车的商品将保存到您账号中</span>
-            <a href="#"><input type="button" onclick="login()" value="立即登录" class="one_load_btn"></a>
+            <a href="http://passport.gmall.com:8085/index?ReturnUrl=http://cart.gmall.com:8084/cartList"><input type="button" onclick="login()" value="立即登录" class="one_load_btn"></a>
         </div>
     </div>
 </div>
@@ -91,9 +91,9 @@
                             <li>
                                 <dt><img  th:src="${cartInfo.productPic}"  src="img\shop1.jpg" alt=""></dt>
                                 <dd th:onclick="toItem(${cartInfo.productSkuId})">
-                                    <p>
+                                    <a th:href="'http://item.gmall.com:8082/'+${cartInfo.productSkuId}+'.html'">
                                         <span th:text="${cartInfo.productName}" >TCL 55A950C 55英寸32核</span>
-                                    </p>
+                                    </a>
                                 </dd>
                             </li>
                             <li>

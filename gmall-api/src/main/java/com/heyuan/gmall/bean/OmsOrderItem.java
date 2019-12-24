@@ -1,7 +1,9 @@
 package com.heyuan.gmall.bean;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class OmsOrderItem implements Serializable {
 
@@ -30,6 +32,16 @@ public class OmsOrderItem implements Serializable {
     private int giftGrowth;
     private String productAttr;
 
+    @Transient
+    List<OmsOrder> OmsOrderList;
+
+    public List<OmsOrder> getOmsOrderList() {
+        return OmsOrderList;
+    }
+
+    public void setOmsOrderList(List<OmsOrder> omsOrderList) {
+        OmsOrderList = omsOrderList;
+    }
 
     public String getId() {
         return id;

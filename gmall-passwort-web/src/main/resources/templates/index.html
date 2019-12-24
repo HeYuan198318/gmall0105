@@ -25,7 +25,7 @@
 		<!--大图-->
 		<div class="top-3">
 			<div class="img_1">
-				<img src="/JD_img/5731485aN1134b4f0.png"/>
+				<img src="/JD_img/bg.png"/>
 			</div>
 			<div id="sign">
 				<div class="si_top">
@@ -90,7 +90,7 @@
 				</ul>
 				<h5 class="rig">
 						<img src="JD_img/4de5019d2404d347897dee637895d02b_25.png"/>
-						<span><a href="http://127.0.0.1:8020/JD/JD_%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2(1)/index.html?__hbt=1512049011905">立即注册</a></span>
+						<span><a href="http://passport.gmall.com:8085/register">立即注册</a></span>
 					</h5>
 			</div>
 			</div>
@@ -191,10 +191,15 @@
                         pass.style.border='1px solid red';
                         err_img1.src='JD_img/img11.png';
                         err_img2.src='JD_img/img22.png';
-                    }else {
-                        // 验证token是否为空或者异常
+                    }
+                    if($("#ReturnUrl").val()==""){
+                        $("#ReturnUrl").val("http://127.0.0.1:8080/home-setting-info.html");
                         window.location.href = $("#ReturnUrl").val() + "?token=" + token;
                     }
+                    else {
+                      window.location.href = $("#ReturnUrl").val() + "?token=" + token;
+                    }
+
                 });
             }
 			

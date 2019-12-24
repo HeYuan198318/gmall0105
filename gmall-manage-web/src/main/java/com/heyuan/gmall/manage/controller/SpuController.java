@@ -9,6 +9,7 @@ import com.heyuan.gmall.manage.util.PmsUploadUtil;
 import com.heyuan.gmall.service.SpuService;
 import org.csource.common.MyException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,6 +70,27 @@ public class SpuController {
         List<PmsProductImage> pmsProductImages =  spuService.spuImageList(spuId);
 
         return pmsProductImages;
+    }
+    /**
+     * 删除spu
+     */
+    @RequestMapping("deleteSpuInfo")
+    @ResponseBody
+    public String deleteSpuInfo(String spuId) {
+        spuService.deleteSpuInfo(spuId);
+        return "success";
+    }
+
+    /**
+     * 更新spu信息
+     */
+    @RequestMapping("updateSpu")
+    @ResponseBody
+    public PmsProductInfo updateSpu(String spuId) {
+        //获取spu所有数据
+        PmsProductInfo pmsProductInfo=spuService.getspuInfo(spuId);
+        //保存更改的数据
+        return pmsProductInfo;
     }
 
 }

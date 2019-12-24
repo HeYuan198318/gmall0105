@@ -102,6 +102,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     }
 
+    //发送延迟消息队列
     @Override
     public void sendDelayPaymentResultCheckQueue(String outTradeNo,int count) {
 
@@ -128,6 +129,7 @@ public class PaymentServiceImpl implements PaymentService {
             // 为消息加入延迟时间
             mapMessage.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_DELAY,1000*60);
 
+            //队列模式发送消息
             producer.send(mapMessage);
 
             session.commit();
@@ -147,6 +149,7 @@ public class PaymentServiceImpl implements PaymentService {
         }
     }
 
+    //支付宝检查接口，进行延迟检查，调用支付检查的接口服务
     @Override
     public Map<String, Object> checkAlipayPayment(String out_trade_no) {
 

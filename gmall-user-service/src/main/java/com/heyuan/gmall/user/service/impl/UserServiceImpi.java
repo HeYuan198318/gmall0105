@@ -106,10 +106,36 @@ public class UserServiceImpi implements UserService {
         return umsMemberReceiveAddress1;
     }
 
+    /**
+     * 添加用户
+     * @param umsMember
+     */
+    @Override
+    public void addUser(UmsMember umsMember) {
+
+        userMapper.insert(umsMember);
+    }
+
+    /**
+     * 更新用户信息
+     * @param umsMember
+     */
+    @Override
+    public int update(UmsMember umsMember) {
+        return userMapper.updateByPrimaryKeySelective(umsMember);
+    }
+
+    @Override
+    public UmsMember getOneUser(String umsMemberId) {
+        UmsMember umsMember=new UmsMember();
+        umsMember.setId(umsMemberId);
+
+        return userMapper.selectOne(umsMember);
+    }
+
     private UmsMember loginFromDb(UmsMember umsMember) {
 
         List<UmsMember> umsMembers=userMapper.select(umsMember);
-
         if (umsMembers.size()!=0){
             return umsMembers.get(0);
         }

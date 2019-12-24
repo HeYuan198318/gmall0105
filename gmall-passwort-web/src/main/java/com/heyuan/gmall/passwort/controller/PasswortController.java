@@ -6,13 +6,16 @@ import com.atguigu.gmall.util.HttpclientUtil;
 import com.heyuan.gmall.bean.UmsMember;
 import com.heyuan.gmall.service.UserService;
 import com.heyuan.gmall.util.JwtUtil;
+import com.heyuan.gmall.util.MD5Utils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +24,7 @@ public class PasswortController {
 
     @Reference
     UserService userService;
+
 
     @RequestMapping("vlogin")
     @ResponseBody
@@ -55,6 +59,7 @@ public class PasswortController {
         umsMember.setSourceUid((String)user_map.get("idstr"));
         umsMember.setCity((String)user_map.get("location"));
         umsMember.setNickname((String)user_map.get("screen_name"));
+        umsMember.setLuckeyCount(0);
         String g = "0";
         String gender = (String)user_map.get("gender");//性别
         //m:男1 f:女2
@@ -129,7 +134,11 @@ public class PasswortController {
         String token="";
 
         //调用用户服务验证用户用户名和密码
+        //解密
+        //String pwd= MD5Utils.convertMD5(MD5Utils.convertMD5(umsMember.getPassword()));
+        //umsMember.setPassword(pwd);
         UmsMember umsMemberLogin=userService.login(umsMember);
+
 
         if (umsMemberLogin!=null){
             //登录成功
@@ -166,4 +175,24 @@ public class PasswortController {
         map.put("ReturnUrl",ReturnUrl);
         return "index";
     }
+
+    @RequestMapping("register")
+    public String register(){
+        return "register";
+    }
+
+    @RequestMapping("regist")
+    public String regist(UmsMember umsMember){
+        UmsMember umsMember1=umsMember;
+        //MD5加密
+        //String pwd=MD5Utils.string2MD5(umsMember.getPassword());
+        umsMember1.setCreateTime(new Date());
+        umsMember1.setNickname("暂无昵称,请设置");
+        umsMember1.setSourceType("1");
+        umsMember1.setLuckeyCount(0);
+        umsMember.setAccessCode("11111");
+        userService.addUser(umsMember1);
+        return "redirect:http://passport.gmall.com:8085/index?ReturnUrl=http://127.0.0.1:8080/home-setting-info.html";
+    }
+
 }

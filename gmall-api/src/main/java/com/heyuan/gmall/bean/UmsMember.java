@@ -1,5 +1,7 @@
 package com.heyuan.gmall.bean;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +23,7 @@ public class UmsMember implements Serializable{
     private Date createTime;
     private String icon;
     private String gender;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     private String city;
     private String job;

@@ -26,7 +26,7 @@ public class SearchController {
 
     public String nickname=null;
 
-    @RequestMapping("list.html")
+    @RequestMapping("list")
     public String list(PmsSearchParam pmsSearchParam, ModelMap modelMap){// 三级分类id、关键字、
 
         // 调用搜索服务，返回搜索结果
@@ -175,6 +175,7 @@ public class SearchController {
             nickname=(String)map1.get("nickname");
             return "index";
         }else {
-        return "index";}
+        return "index";
+        }
     }
 }

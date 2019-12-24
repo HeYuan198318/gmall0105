@@ -3,6 +3,7 @@ package com.heyuan.gmall.order.service.impl;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
+import com.heyuan.gmall.bean.OmsCartItem;
 import com.heyuan.gmall.bean.OmsOrder;
 import com.heyuan.gmall.bean.OmsOrderItem;
 import com.heyuan.gmall.mq.ActiveMQUtil;
@@ -159,5 +160,12 @@ public class OrderServiceImpl implements OrderService {
                 e1.printStackTrace();
             }
         }
+    }
+   //获取该用户所有订单信息
+    @Override
+    public List<OmsOrderItem> selectAllOrderItemValueList(String nickname) {
+        List<OmsOrderItem> omsCartItems=omsOrderItemMapper.selectAllOrderItemValueList(nickname);
+
+        return omsCartItems;
     }
 }

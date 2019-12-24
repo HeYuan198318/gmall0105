@@ -20,4 +20,10 @@ public interface UserService {
     UmsMember checkOauthUser(UmsMember umsCheck);
 
     UmsMemberReceiveAddress getReceiveAddressById(String receiveAddressId);
+
+    void addUser(UmsMember umsMember);
+
+    int update(UmsMember umsMember);
+
+    UmsMember getOneUser(String umsMemberId);
 }
