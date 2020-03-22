@@ -38,7 +38,7 @@ public class PasswortController {
         paramMap.put("client_id","1590848947");
         paramMap.put("client_secret","357f98f9c9d412faea21cc47b11878e5");
         paramMap.put("grant_type","authorization_code");
-        paramMap.put("redirect_uri","http://passport.gmall.com:8085/vlogin");
+        paramMap.put("redirect_uri","http://password.gmall.com:8085/vlogin");
         paramMap.put("code",code);// 授权有效期内可以使用，没新生成一次授权码，说明用户对第三方数据进行重启授权，之前的access_token和授权码全部过期
         String access_token_json = HttpclientUtil.doPost(s3, paramMap);
 
@@ -100,7 +100,6 @@ public class PasswortController {
 
         // 将token存入redis一份
         userService.addUserToken(token,memberId);
-
 
         return "redirect:http://search.gmall.com:8083/index?token="+token;
     }

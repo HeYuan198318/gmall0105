@@ -6,8 +6,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Response;
 import redis.clients.jedis.Transaction;
@@ -45,7 +44,7 @@ public class SecKillController {
         }
 
         jedis.close();
-        return "1";
+        return "seckill-index";
     }
 
     /***
@@ -53,26 +52,29 @@ public class SecKillController {
      * @return
      */
     @RequestMapping("kill")
-    @ResponseBody
     public String kill(){
-        Jedis jedis = redisUtil.getJedis();
-        // 开启商品的监控
-        jedis.watch("106");//保证数据一致性
-        int stock = Integer.parseInt(jedis.get("106"));
-        if(stock>0){
-            Transaction multi = jedis.multi();//开启事务
-            multi.incrBy("106",-1);//扣减库存
-            List<Object> exec = multi.exec();//执行任务
-            if(exec!=null&&exec.size()>0){
-                System.out.println("当前库存剩余数量"+stock+",某用户抢购成功，当前抢购人数："+(1000-stock));
-                // 用消息队列发出订单消息
-
-            }else {
-                System.out.println("当前库存剩余数量"+stock+",某用户抢购失败");
-            }
-
-        }
-        jedis.close();
-        return "1";
+//        Jedis jedis = redisUtil.getJedis();
+//        // 开启商品的监控
+//        jedis.watch("106");//保证数据一致性
+//        int stock = Integer.parseInt(jedis.get("106"));
+//        if(stock>0){
+//            Transaction multi = jedis.multi();//开启事务
+//            multi.incrBy("106",-1);//扣减库存
+//            List<Object> exec = multi.exec();//执行任务
+//            if(exec!=null&&exec.size()>0){
+//                System.out.println("当前库存剩余数量"+stock+",某用户抢购成功，当前抢购人数："+(1000-stock));
+//                // 用消息队列发出订单消息
+//
+//            }else {
+//                System.out.println("当前库存剩余数量"+stock+",某用户抢购失败");
+//            }
+//
+//        }
+//        jedis.close();
+        return "seckill-index";
+    }
+    @GetMapping("seckill-item.html")
+    public String seckill_item(){
+        return "seckill-item";
     }
 }

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>赤脚商城-首页</title>
   <link rel="stylesheet" href="/index/css/swiper-3.4.2.min.css">
   <link rel="stylesheet" href="/index/css/GL.css">
   <script src="/index/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -50,7 +50,7 @@
     <div class="header_head">
       <div class="header_head_box">
         <a href="#" class="img" style="text-align: center;margin-top:30px;color: red;font-size: 30px;">
-        赤脚商城</a>
+          <img src="/index/img/logo.jpg" height="80" width="175"/></a>
         <b class="header_head_p">
   						<a href="#">
   							<img src="/index/img/img_05.png" style="border-radius: 50%;"/>
@@ -101,13 +101,12 @@
             </p></a>
           </li>
           <li>
-            <a href="/注册页面\index.html" class="li_2">免费注册</a>
+            <a href="http://passport.gmall.com:8085/register" class="li_2">免费注册</a>
           </li>
           <span>|</span>
           <li>
-            <a href="#">我的订单</a>
+            <a th:href="'http://order.gmall.com:8086/list?nickname='+${nickname}">我的订单</a>
           </li>
-
 
         </ul>
       </div>
@@ -123,7 +122,7 @@
       <div class="header_ico">
         <div class="header_gw">
           <img src="/index/img/img_15.png" />
-          <span><a href="http://cart.gmall.com:8084/One_JDshop.html">我的购物车</a></span>
+          <span><a href="http://cart.gmall.com:8084/cartList">我的购物车</a></span>
           <span>0</span>
         </div>
         <div class="header_ko">
@@ -161,7 +160,7 @@
       <nav>
         <ul>
           <li>
-            <a href="#">秒杀</a>
+            <a href="http://127.0.0.1:8001/kill">秒杀</a>
           </li>
           <li>
             <a href="#">优惠券</a>
@@ -301,10 +300,12 @@
                 <a href="#"><img class="" src="/index/img/touxiang.png"></a>
               </div>
               <div class="user_info_show">
-                <p class="">Hi, 欢迎来到!</p>
+                <a href="http://127.0.0.1:8080/home-setting-info.html">
+                <p class="" th:text="(${nickname==null})?'Hi, 欢迎来到!':${nickname}"></p>
+                </a>
                 <p>
-                  <a href="#" class="">登录</a>
-                  <a href="#" class="">注册</a>
+                  <a href="http://passport.gmall.com:8085/index?ReturnUrl=http://search.gmall.com:8083/index" class="">登录</a>
+                  <a href="http://passport.gmall.com:8085/register" class="">注册</a>
                 </p>
               </div>
             </div>
@@ -560,7 +561,9 @@
       <div class="section_second_header_left">
         <p></p>
         <span class="">秒杀</span>
+        <a href="http://127.0.0.1:8001/kill">
         <span>总有你想不到的低价</span>
+        </a>
         <span>
         </span>
       </div>

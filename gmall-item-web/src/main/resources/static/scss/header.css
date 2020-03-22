@@ -67,7 +67,9 @@ a {
       #max header .min .header_ul_right {
         width: 700px;
         height: 31px;
-        float: right; }
+        float: right;
+        padding-left: 350px;
+      }
         #max header .min .header_ul_right li {
           width: 77px;
           height: 31px;

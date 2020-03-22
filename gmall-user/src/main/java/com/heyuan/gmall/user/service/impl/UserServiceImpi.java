@@ -49,4 +49,59 @@ public class UserServiceImpi implements UserService {
     public UmsMember login(UmsMember umsMember) {
         return null;
     }
+
+    @Override
+    public void addUserToken(String token, String memberId) {
+
+    }
+
+    @Override
+    public UmsMember addOauthUser(UmsMember umsMember) {
+        return null;
+    }
+
+    @Override
+    public UmsMember checkOauthUser(UmsMember umsCheck) {
+        return null;
+    }
+
+    @Override
+    public UmsMemberReceiveAddress getReceiveAddressById(String receiveAddressId) {
+        return null;
+    }
+
+    @Override
+    public void addUser(UmsMember umsMember) {
+
+    }
+
+    @Override
+    public int update(UmsMember umsMember) {
+        return 0;
+    }
+
+    @Override
+    public UmsMember getOneUser(String umsMemberId) {
+        return null;
+    }
+
+    @Override
+    public void addUseraddress(UmsMemberReceiveAddress umsMemberReceiveAddress) {
+
+    }
+
+    @Override
+    public int delUseraddress(String userAddressId) {
+        return 0;
+    }
+
+    @Override
+    public void delUserAlladdress(String userId) {
+
+    }
+
+    @Override
+    public void delUserInfo(String userId) {
+
+    }
 }

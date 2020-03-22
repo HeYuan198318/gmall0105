@@ -26,4 +26,12 @@ public interface UserService {
     int update(UmsMember umsMember);
 
     UmsMember getOneUser(String umsMemberId);
+
+    void addUseraddress(UmsMemberReceiveAddress umsMemberReceiveAddress);
+
+    int delUseraddress(String userAddressId);
+
+    void delUserAlladdress(String userId);
+
+    void delUserInfo(String userId);
 }

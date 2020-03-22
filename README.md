@@ -23,3 +23,5 @@ gmall-order-web 订单 8086
 gmall-order-service 订单服务8076
 
 gmall-payment8087
+
+gmall-sckill 8001

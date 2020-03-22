@@ -85,20 +85,19 @@ public class UserController {
             return "home-setting-info";
         }
         //从数据库获取数据
-
+        modelMap.put("nickname", nickname);
         return "home-setting-info";
     }
 
     @RequestMapping("updateinfo")
     @LoginRequired(loginSuccess = true)
-    @ResponseBody
     public String update(UmsMember umsMember){
         umsMember.setId(umsMemberId);
         int i=userService.update(umsMember);
         if (i!=0){
-            return "修改成功";
+            return "redirect:http://127.0.0.1:8080/home-setting-info.html";
         }
-        return "修改失败";
+        return "redirect:http://127.0.0.1:8080/home-setting-info.html";
     }
     //收藏
     @RequestMapping("home-person-collect.html")
@@ -113,10 +112,13 @@ public class UserController {
         return "home-person-footmark";
     }
     //个人信息
+    //地址
     @RequestMapping("home-setting-address.html")
     @LoginRequired(loginSuccess = true)
-    public String address(ModelMap modelMap){
+    public String address(ModelMap modelMap,String token){
         modelMap.put("nickname", nickname);
+        List<UmsMemberReceiveAddress> umsMemberReceiveAddressList=getReceiveAddressByMemberId(umsMemberId);
+        modelMap.put("UserReceiveAddresList",umsMemberReceiveAddressList);
         return "home-setting-address";
     }
     @RequestMapping("home-setting-safe.html")
@@ -126,5 +128,23 @@ public class UserController {
         return "home-setting-safe";
     }
 
-
+    @RequestMapping("addUseraddress")
+    @LoginRequired(loginSuccess = true)
+    public String addUseraddress(UmsMemberReceiveAddress umsMemberReceiveAddress){
+        umsMemberReceiveAddress.setMemberId(umsMemberId);
+        userService.addUseraddress(umsMemberReceiveAddress);
+        return "redirect:http://127.0.0.1:8080/home-setting-address.html";
+    }
+    /**
+     * 删除当前地址
+     */
+    @RequestMapping("delUseraddress")
+    @LoginRequired(loginSuccess = true)
+    @ResponseBody
+    public String delUseraddress(String userAddressId){
+        int i=userService.delUseraddress(userAddressId);
+        if (i!=0) {
+            return "success";
+        }else {return "fail";}
+    }
 }

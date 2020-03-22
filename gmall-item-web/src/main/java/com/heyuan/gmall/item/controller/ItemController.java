@@ -2,6 +2,7 @@ package com.heyuan.gmall.item.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
+import com.heyuan.gmall.annotations.LoginRequired;
 import com.heyuan.gmall.bean.PmsProductSaleAttr;
 import com.heyuan.gmall.bean.PmsSkuInfo;
 import com.heyuan.gmall.bean.PmsSkuSaleAttrValue;
@@ -31,8 +32,8 @@ public class ItemController {
     SpuService spuService;
 
     @RequestMapping("{skuId}.html")
+    @LoginRequired(loginSuccess = false)
     public String item(@PathVariable String skuId, ModelMap map, HttpServletRequest request){
-
 //    PmsSkuInfo pmsSkuInfo=skuService.getSkuById(skuId);
 //    //sku对象
 //    map.put("skuInfo",pmsSkuInfo);

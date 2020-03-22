@@ -12,7 +12,9 @@ import com.heyuan.gmall.service.SkuService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -106,11 +108,13 @@ public class CartController {
 
     @RequestMapping("addToCart")
     @LoginRequired(loginSuccess = false)
-    public String addToCart(String skuId, int quantity, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    public String addToCart(String skuId, int quantity, HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
         List<OmsCartItem> omsCartItems = new ArrayList<>();
 
         // 调用商品服务查询商品信息
         PmsSkuInfo skuInfo = skuService.getSkuById(skuId, "");
+        modelMap.put("skuInfo",skuInfo);
+        modelMap.put("skuNum",quantity);
 
         // 将商品信息封装成购物车信息
         OmsCartItem omsCartItem = new OmsCartItem();
@@ -167,6 +171,7 @@ public class CartController {
             // 用户已经登录
             // 从db中查出购物车数据
             OmsCartItem omsCartItemFromDb = cartService.ifCartExistByUser(memberId,skuId);
+            modelMap.put("nickname",nickname);
 
             if(omsCartItemFromDb==null){
                 // 该用户没有添加过当前商品
@@ -184,9 +189,7 @@ public class CartController {
             // 同步缓存
             cartService.flushCartCache(memberId);
         }
-
-
-        return "redirect:/success.html";
+        return "success";
     }
 
     private boolean if_cart_exist(List<OmsCartItem> omsCartItems, OmsCartItem omsCartItem) {
@@ -203,12 +206,21 @@ public class CartController {
         return b;
     }
 
-
-
     @RequestMapping("One_JDshop")
     @LoginRequired(loginSuccess = false)
     public String index(){
         return "One_JDshop";
+    }
+
+    //删除购物车的商品
+    @RequestMapping("deleteProduct")
+    @ResponseBody
+    public String delete(String skuId){
+        if(skuId!=null) {
+            cartService.delCart(skuId);
+            return "success";
+        }else
+            return "fail";
     }
 
 

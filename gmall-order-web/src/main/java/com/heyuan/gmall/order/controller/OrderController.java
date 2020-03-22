@@ -186,6 +186,8 @@ public class OrderController {
         return totalAmount;
     }
 
+
+    //我的订单列表
     @RequestMapping("list")
     @LoginRequired(loginSuccess = true)
     public String orderlist( HttpServletRequest request,ModelMap modelMap) {

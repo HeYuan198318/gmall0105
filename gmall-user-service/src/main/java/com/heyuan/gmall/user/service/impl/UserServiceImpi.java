@@ -133,6 +133,50 @@ public class UserServiceImpi implements UserService {
         return userMapper.selectOne(umsMember);
     }
 
+    /**
+     * 添加地址
+     */
+    @Override
+    public void addUseraddress(UmsMemberReceiveAddress umsMemberReceiveAddress) {
+        umsMemberReceiveAddressMapper.insert(umsMemberReceiveAddress);
+    }
+
+    /**
+     * 删除地址
+     * @param userAddressId
+     */
+    @Override
+    public int delUseraddress(String userAddressId) {
+        UmsMemberReceiveAddress umsMemberReceiveAddress=new UmsMemberReceiveAddress();
+        umsMemberReceiveAddress.setId(userAddressId);
+        int i=umsMemberReceiveAddressMapper.deleteByPrimaryKey(umsMemberReceiveAddress);
+        return i;
+    }
+
+    /**
+     * 删除当前用户所有地址信息
+     * @param userId
+     */
+    @Override
+    public void delUserAlladdress(String userId) {
+        UmsMemberReceiveAddress umsMemberReceiveAddress=new UmsMemberReceiveAddress();
+        umsMemberReceiveAddress.setMemberId(userId);
+        umsMemberReceiveAddressMapper.delete(umsMemberReceiveAddress);
+
+    }
+
+    /**
+     * 删除当前用户信息
+     * @param userId
+     */
+    @Override
+    public void delUserInfo(String userId) {
+        UmsMember umsMember=new UmsMember();
+        umsMember.setId(userId);
+        userMapper.deleteByPrimaryKey(umsMember);
+
+    }
+
     private UmsMember loginFromDb(UmsMember umsMember) {
 
         List<UmsMember> umsMembers=userMapper.select(umsMember);

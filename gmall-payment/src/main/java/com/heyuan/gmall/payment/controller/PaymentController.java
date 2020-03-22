@@ -46,11 +46,11 @@ public class PaymentController {
         String sign = request.getParameter("sign");
         String trade_no = request.getParameter("trade_no");
         String out_trade_no = request.getParameter("out_trade_no");
-        String trade_status = request.getParameter("trade_status");
+        String trade_status = request.getParameter("trade_status");//支付状态
         String total_amount = request.getParameter("total_amount");
         String subject = request.getParameter("subject");
         String call_back_content = request.getQueryString();
-
+        modelMap.put(" out_trade_no", out_trade_no);
 
         // 通过支付宝的paramsMap进行签名验证，2.0版本的接口将paramsMap参数去掉了，导致同步请求没法验签
         if(StringUtils.isNotBlank(sign)){
@@ -65,9 +65,9 @@ public class PaymentController {
             paymentInfo.setCallbackTime(new Date());
             paymentInfo.setSubject(subject);
             paymentInfo.setTotalAmount(new BigDecimal(total_amount));
+            //支付成功后,支付服务,订单服务,库存服务,物流服务
             paymentService.updatePayment(paymentInfo);
         }
-        //支付成功后,支付服务,订单服务,库存服务,物流服务
 
         return "finish";
     }

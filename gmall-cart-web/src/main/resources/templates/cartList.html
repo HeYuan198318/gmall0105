@@ -14,20 +14,71 @@
 <header>
     <a name="mao1">
         <div class="header">
-
             <ul class="header-left">
                 <li>
-
                     <a href="">首页</a>
                 </li>
+                <li class="header-l-2">
+                    <i class="fa fa-map-marker" style="color: #5C5452;"></i>
+                    <a href="">北京</a>
+                    <div class="header-l-d">
 
+                        <ul>
+                            <li><a href="" style="background: red; color: white;">北京</a></li>
+                            <li><a href="">山西</a></li>
+                            <li><a href="">内蒙古</a></li>
+                            <li><a href="">福建</a></li>
+                            <li><a href="">江西</a></li>
+                            <li><a href="">西藏</a></li>
+                            <li><a href="">新疆</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="">上海</a></li>
+                            <li><a href="">河南</a></li>
+                            <li><a href="">江苏</a></li>
+                            <li><a href="">湖北</a></li>
+                            <li><a href="">四川</a></li>
+                            <li><a href="">陕西</a></li>
+                            <li><a href="">港澳</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="">天津</a></li>
+                            <li><a href="">辽宁</a></li>
+                            <li><a href="">山东</a></li>
+                            <li><a href="">湖南</a></li>
+                            <li><a href="">海南</a></li>
+                            <li><a href="">甘肃</a></li>
+                            <li><a href="">台湾</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="">重庆</a></li>
+                            <li><a href="">吉林</a></li>
+                            <li><a href="">安徽</a></li>
+                            <li><a href="">广东</a></li>
+                            <li><a href="">贵州</a></li>
+                            <li><a href="">青岛</a></li>
+                            <li><a href="">钓鱼岛</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="">河北</a></li>
+                            <li><a href="">黑龙江</a></li>
+                            <li><a href="">浙江</a></li>
+                            <li><a href="">广西</a></li>
+                            <li><a href="">云南</a></li>
+                            <li><a href="">宁夏</a></li>
+                            <li><a href="">海外</a></li>
+                        </ul>
+
+                    </div>
+                </li>
             </ul>
+
             <ul class="header-right">
                 <li><a href="http://passport.gmall.com:8085/index?ReturnUrl=http://cart.gmall.com:8084/cartList" style="color: red;"
                        th:text="(${nickname}!=null)?${nickname}:'你好,请登录'">你好，请登录</a></li>
                 <li><a href="../注册页面\index.html" >免费注册</a></li>
                 <li class="spacer"></li>
-                <li><a href="">我的订单</a></li>
+                <li><a href="http://order.gmall.com:8086/list">我的订单</a></li>
                 <li class="spacer"></li>
 
             </ul>
@@ -84,7 +135,6 @@
             <ul>
                 <li  th:each="cartInfo:${cartList}">
                     <div> </div>
-
                     <div>
                         <ol>
                             <li><input type="checkbox"   class="check"  th:value="${cartInfo.productSkuId}"  onchange="checkSku(this)" th:checked="(${cartInfo.isChecked}=='1')?'true':'false'" /></li>
@@ -113,44 +163,6 @@
                         </ol>
                     </div>
                 </li>
-                <!--<li>
-                    <div>
-                    </div>
-                    <div>
-                        <ol>
-                            <li><input type="checkbox"  class="check"></li>
-                            <li>
-                                <dt><img src="img\shop1.jpg" alt=""></dt>
-                                <dd>
-                                    <p>
-
-                                        <span>TCL 55A950C 55英寸32核</span>
-                                        <span>尺码: 55时 超薄曲面 人工智能</span>
-                                    </p>
-                                    <p>人工智能 HDR曲面超薄4K电视金属机</p>
-
-                                </dd>
-                            </li>
-                            <li>
-                                <p class="dj">￥4599.00</p>
-
-                            </li>
-                            <li>
-                                <p>
-                                    <span>-</span>
-                                    <span>5</span>
-                                    <span>+</span>
-                                </p>
-
-                            </li>
-                            <li style="font-weight:bold"><p class="zj">￥22995.00</p></li>
-                            <li>
-                                <p>删除</p>
-
-                            </li>
-                        </ol>
-                    </div>
-                </li>-->
 
             </ul>
         </div>
@@ -197,7 +209,7 @@
     </div>
     <div>
         <button type="button">删除</button>
-
+        <button type="button">移到我的关注</button>
     </div>
 </div>
 <div class="One_moveGzIfNull">
@@ -239,27 +251,131 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!--底部-->
 
 <div class="one_footer">
+    <div class="footer_head">
+        <ul>
+            <li>
+                <img src="img/footer1.jpg" />
+                <span>品类齐全，轻松购物</span>
+            </li>
+            <li>
+                <img src="img/footer2.jpg" />
+                <span>多仓直发，极速配送</span>
+            </li>
+            <li>
+                <img src="img/footer3.jpg" />
+                <span>正品行货，极致服务</span>
+            </li>
+            <li>
+                <img src="img/footer4.jpg" />
+                <span>天天低价，畅选无忧</span>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="footer_con">
+        <div class="con_1">
+            <ul>
+                <h3>购物指南</h3>
+                <li>
+                    <a href="#">购物流程</a>
+                </li>
+                <li>
+                    <a href="#">会员介绍</a>
+                </li>
+                <li>
+                    <a href="#">生活旅行/团购</a>
+                </li>
+                <li>
+                    <a href="#">常见问题</a>
+                </li>
+                <li>
+                    <a href="#">大家电</a>
+                </li>
+                <li>
+                    <a href="#">联系服务</a>
+                </li>
+            </ul>
+            <ul>
+                <h3>配送方式</h3>
+                <li>
+                    <a href="#">上门自提</a>
+                </li>
+                <li>
+                    <a href="#">211限时到达</a>
+                </li>
+                <li>
+                    <a href="#">配送服务查询</a>
+                </li>
+                <li>
+                    <a href="#">配送费收取标准</a>
+                </li>
+                <li>
+                    <a href="#">海外配送</a>
+                </li>
+            </ul>
+            <ul>
+                <h3>支付方式</h3>
+                <li>
+                    <a href="#">货到付款</a>
+                </li>
+                <li>
+                    <a href="#">在线支付</a>
+                </li>
+                <li>
+                    <a href="#">分期付款</a>
+                </li>
+                <li>
+                    <a href="#">邮局汇款</a>
+                </li>
+                <li>
+                    <a href="#">公司转账</a>
+                </li>
+            </ul>
+            <ul>
+                <h3>售后服务</h3>
+                <li>
+                    <a href="#">售后政策</a>
+                </li>
+                <li>
+                    <a href="#">价格保护</a>
+                </li>
+                <li>
+                    <a href="#">退款说明</a>
+                </li>
+                <li>
+                    <a href="#">返修/退换货</a>
+                </li>
+                <li>
+                    <a href="#">取消订单</a>
+                </li>
+            </ul>
+            <ul>
+                <h3>特色服务</h3>
+                <li>
+                    <a href="#">夺宝岛</a>
+                </li>
+                <li>
+                    <a href="#">DIY装机</a>
+                </li>
+                <li>
+                    <a href="#">延保服务</a>
+                </li>
+                <li>
+                    <a href="#">京东E卡</a>
+                </li>
+                <li>
+                    <a href="#">京东通信</a>
+                </li>
+                <li>
+                    <a href="#">京东JD+</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
 </div>
 </body>
@@ -277,9 +393,9 @@
       var s = encodeURIComponent("http://cart.gmall.com:8087/cartList");
        window.location.href="http://passport.atguigu.com/index?originUrl="+s;
     }
-
-    function checkSku( chkbox){
-       var skuId= $(chkbox).attr("value");
+    var skuId="";
+    function checkSku(chkbox){
+        skuId= $(chkbox).attr("value");
        var checked=$(chkbox).prop("checked");
        var isCheckedFlag="0";
        if(checked){
@@ -473,16 +589,26 @@
             $(".One_moveGzIfNull").hide();
         }
         //移除结账固定定位
-        // if($(".check").length==1){
-        // 	$(".fix").remove();
-        // }
-        // })
-        //var that=$(this);
+        if($(".check").length==1){
+        	$(".fix").remove();
+        }
+        })
+        var that=$(this);
         //确定删除
-  /*      $(".One_isDel>div:last-child button:first-child").click(function(){
+       /* $(".One_isDel>div:last-child button:first-child").click(function(){
             $(".One_mb").hide();    //蒙版隐藏
             $(".One_isDel").hide(); //删除弹框隐藏
             $(".check:checked").parent().parent().parent().parent().remove();  //删除选中商品
+            alert(skuId)
+            // $.ajax({
+            //     url: "deleteProduct",
+            //     type: "post",
+            //     data: skuId,
+            //     dataType: "json",
+            //     success: function (result) {
+            //     }
+            //
+            // });
             if($(".fix").offset().top>$(".fix1").offset().top){
                 $(".fix").hide();
             }
@@ -492,7 +618,7 @@
                 $(".fnt").html("￥ 0.00");
             }
         })*/
-    })
+
     //确定删除弹框移入我的关注
     $(".One_isDel>div:last-child button:last-child").click(function(){
         $(".One_isDel").hide();
@@ -612,18 +738,28 @@
         $(".One_isDel").hide();
     })
     $(".One_ShopCon ul li>div:nth-child(2) ol>li:nth-child(6) p:first-child").click(function(){
+        if (skuId!=""){
         $(".One_mb").show();
         $(".One_isDel").show();
         var that=$(this);
         //确定删除
-/*        $(".One_isDel>div:last-child button:first-child").click(function(){
+       $(".One_isDel>div:last-child button:first-child").click(function(){
             $(".One_mb").hide();
             $(".One_isDel").hide();
             that.parent().parent().parent().parent().remove();
-            // 移除结账固定定位
-            // if($(".check").length==1){
-            // 	$(".fix").remove();
-            // }
+           var param="skuId="+skuId;
+           $.post("deleteProduct",param,function (data) {
+               //$("#cartListInner").html(html);
+               if($(".check").length==0){
+                   $(".allCheck").prop("checked",false);
+                   $(".sumNum").html("0");
+                   $(".fnt").html("￥ 0.00");
+               }
+           });
+            //移除结账固定定位
+            if($(".check").length==1){
+            	$(".fix").remove();
+            }
             if($(".fix").offset().top>$(".fix1").offset().top){
                 $(".fix").hide();
             }
@@ -632,7 +768,8 @@
                 $(".sumNum").html("0");
                 $(".fnt").html("￥ 0.00");
             }
-        })*/
+        })} else {}
+        alert("未勾选要删除商品")
     })
 /*    //页面滚动删除去结算固定定位隐藏
     $(document).scroll(function(){
@@ -702,14 +839,6 @@
     $(".nmbd dd:last-child button:last-child").click(function(){
         $(this).parent().parent().slideUp(100)
     })
-
-
-
-
-
-
-
-
 
 
     //active
